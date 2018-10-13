@@ -153,7 +153,7 @@ span.picture {
 }
 
 .well a {
-  color: #073B15
+  color: #073B15;
 }
 
 .chef_info {
@@ -161,5 +161,11 @@ span.picture {
 
 }
 .colormatch a {
-  color: #073B15
+  color: #073B15;
+}
+.recipee-actions {
+  padding-top: 5px;
+  a {
+  color: #fff;
+  }
 }

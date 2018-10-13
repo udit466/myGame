@@ -18,8 +18,25 @@ class RecipeesController <ApplicationController
 			render 'new'
 		end
 	end
+	def edit
+		@recipee= Recipee.find(params[:id])
+	end
 
+	def update
+		@recipee= Recipee.find(params[:id])
+		if @recipee.update(recipee_params)
+			flash[:success] ="Recipee was updated successfully"
+			redirect_to recipee_path(@recipee)
+		else
+			render "edit"
+		end
+	end
 
+	def destroy
+  		Recipee.find(params[:id]).destroy
+  		flash[:success] = "Recipee deleted successfully"
+  		redirect_to recipees_path
+	end
 
 	private 
 	def recipee_params

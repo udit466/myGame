@@ -30,15 +30,16 @@ class RecipeesTest < ActionDispatch::IntegrationTest
   	assert_match @recipee.name, response.body
   	assert_match @recipee.description, response.body
   	assert_match @chef.chefname, response.body
-  		
-  	end
+  	assert_select "a[href=?]", edit_recipee_path(@recipee), text: "Edit this recipee"
+  	assert_select 'a[href=?]', recipee_path(@recipee), text: "Delete this recipee"
+    end
     test "create new valid recipee" do
       get new_recipee_path
       assert_template "recipees/new"
       name_of_recipee= "chicken saute"
       description_of_recipee= "add chicken add veggies and voila"
       assert_difference "Recipee.count"  do
-        post recipees_path, params: {recipee: {name: name_of_recipee, description: description_of_recipee
+      post recipees_path, params: {recipee: {name: name_of_recipee, description: description_of_recipee
 
         }}
       end
