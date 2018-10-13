@@ -1,15 +1,15 @@
 class RecipeesController <ApplicationController
+	before_action :set_recipee, only: [:show, :edit,:update]
 	def index
 		@recipees = Recipee.all
 	end
 	def show
-		@recipee= Recipee.find(params[:id])
 	end
 	def new
 		@recipee= Recipee.new
 	end
 	def create
-		@recipee = Recipee.new(recipee_params)
+		@recipee= Recipee.new(recipee_params)
 		@recipee.chef= Chef.first
 		if @recipee.save
 			flash[:success]= "Recipee was created successfully"
@@ -19,11 +19,9 @@ class RecipeesController <ApplicationController
 		end
 	end
 	def edit
-		@recipee= Recipee.find(params[:id])
 	end
 
 	def update
-		@recipee= Recipee.find(params[:id])
 		if @recipee.update(recipee_params)
 			flash[:success] ="Recipee was updated successfully"
 			redirect_to recipee_path(@recipee)
@@ -39,6 +37,9 @@ class RecipeesController <ApplicationController
 	end
 
 	private 
+	def set_recipee
+		@recipee=Recipee.find(params[:id])
+	end
 	def recipee_params
 		params.require(:recipee).permit(:name, :description)
 

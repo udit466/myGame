@@ -7,7 +7,16 @@ class RecipeesDeleteTest < ActionDispatch::IntegrationTest
 	end
 
 
-
+		test "successfully delete a recipee" do
+  		get recipee_path(@recipee)
+  		assert_template 'recipees/show'
+  		assert_select 'a[href=?]', recipee_path(@recipee), text: "Delete this recipee"
+  		assert_difference 'Recipee.count', -1 do
+    		delete recipee_path(@recipee)
+  		end
+  		assert_redirected_to recipees_path
+  		assert_not flash.empty?
+	end
 
 
 
