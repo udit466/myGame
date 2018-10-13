@@ -27,7 +27,11 @@ $navbar-default-color: $light-orange;
 body {
   padding-top: 80px;
 }
-
+.footer {
+  margin-top: 25px;
+  border-top: 1px solid #eaeaea;
+  color: #777;
+}
 .nav_item {
   margin-left: 25px;
   float: left;
@@ -42,13 +46,20 @@ body {
     padding-left: 80px;
 }
 
-.jumbotron h1,h2{
+.jumbotron h1{
     color: #fff;
     text-align:center;
     margin-bottom: 30px;
     letter-spacing: -1px;
     font-weight:bold;
     
+}
+.jumbotron h2{
+    color: #fff;
+    text-align:center;
+    margin-bottom: 30px;
+    letter-spacing: -1px;
+    font-weight:bold;  
 }
 .nav_ul_item {
   padding-left: 25px;
