@@ -1,0 +1,17 @@
+<%= render 'shared/page_title', title: "showing all recipees" %>
+<% @recipees.each do |recipee| %>
+	<div class="row">
+		<div class="col-md-2">
+			<section class="chef_info center">
+				<%= gravatar_for(recipee.chef, size: 120) %>
+			</section>
+		</div>
+	<div class= "cold-md-8 well">
+	 <h4><%= link_to recipee.name, recipee_path(recipee) %></h4>
+	<p><%= truncate(recipee.description, length: 150) %></p>
+	<p>
+	<span class= "quiet">Created<small><%= time_ago_in_words(recipee.created_at)%> ago</small></span>
+	</p>
+	</div>
+	</div>
+<% end %>
