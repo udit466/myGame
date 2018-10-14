@@ -1,38 +1,37 @@
 require 'test_helper'
 
 class RecipeesTest < ActionDispatch::IntegrationTest
-	
-	def setup
-		@chef= Chef.create!(chefname: "Paulo", email:"paulo@gmail.com")
-		@recipee = Recipee.create(name: "vegetable saute", description: "great vegetable sautee, add vegetable and oil", chef: @chef)
-		@recipee2=@chef.recipees.build(name: "chicken saute", description: "great chicken dish")
-		@recipee2.save
-	end
-	test "should get recipees index" do
-		get recipees_url
-		assert_response :success
-	end
+  
+  def setup
+    @chef= Chef.create!(chefname: "Paulo", email:"paulo@gmail.com",password: "password", password_confirmation: "password")
+    @recipee = Recipee.create(name: "vegetable saute", description: "great vegetable sautee, add vegetable and oil", chef: @chef)
+    @recipee2=@chef.recipees.build(name: "chicken saute", description: "great chicken dish")
+    @recipee2.save
+  end
+  test "should get recipees index" do
+    get recipees_url
+    assert_response :success
+  end
   # test "the truth" do
   #   assert true
   # end
 
 
   test "should get recipees listing" do
-  	get recipees_path
-  	assert_template 'recipees/index'
-  	assert_select "a[href=?]", recipee_path(@recipee), text: @recipee.name
-  	assert_select "a[href=?]", recipee_path(@recipee2), text: @recipee2.name
+    get recipees_path
+    assert_template 'recipees/index'
+    assert_select "a[href=?]", recipee_path(@recipee), text: @recipee.name
+    assert_select "a[href=?]", recipee_path(@recipee2), text: @recipee2.name
   end
 
   test "should get recipees show" do
-  	get recipee_path(@recipee)
-  	assert_template 'recipees/show'
-  	assert_match @recipee.name, response.body
-  	assert_match @recipee.description, response.body
-  	assert_match @chef.chefname, response.body
-  	assert_select "a[href=?]", edit_recipee_path(@recipee), text: "Edit this recipee"
-  	assert_select 'a[href=?]', recipee_path(@recipee), text: "Delete this recipee"
-    assert_select "a[href=?]", recipees_path, text: "Return to recipees listing"
+    get recipee_path(@recipee)
+    assert_template 'recipees/show'
+    assert_match @recipee.name, response.body
+    assert_match @recipee.description, response.body
+    assert_match @chef.chefname, response.body
+    assert_select "a[href=?]", edit_recipee_path(@recipee), text: "Edit this recipee"
+    assert_select 'a[href=?]', recipee_path(@recipee), text: "Delete this recipee"
     end
     test "create new valid recipee" do
       get new_recipee_path
@@ -60,10 +59,4 @@ class RecipeesTest < ActionDispatch::IntegrationTest
       assert_select "div.panel-body"
     end
 
-
-
-
-
-
-  end
-
+    end

@@ -2,7 +2,8 @@ require 'test_helper'
 
 class RecipeesEditTest < ActionDispatch::IntegrationTest
 	def setup
-		@chef= Chef.create!(chefname: "Paulo", email:"paulo@gmail.com")
+		@chef= Chef.create!(chefname: "Paulo", email:"paulo@gmail.com",
+			password: "password", password_confirmation: "password")
 		@recipee = Recipee.create(name: "vegetable saute", description: "great vegetable sautee, add vegetable and oil", chef: @chef)
 	end
 	test "reject invalid recipee update" do 
