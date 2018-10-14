@@ -4,13 +4,17 @@ Rails.application.routes.draw do
 
 
   resources :recipees
+  get "/signup", to: 'chefs#new'
+  resources :chefs, except: [:new]
+  
+
   resources :recipes do
     member do
       post 'like'
     end
   end
   
-  resources :chefs, except: [:new, :destroy]
+  
   
   get '/register', to: 'chefs#new'
   
