@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :chefs, except: [:new]
   
 
-  resources :recipes do
+  resources :recipees do
     member do
       post 'like'
     end
