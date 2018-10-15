@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
 
   resources :recipees
-  get "/signup", to: 'chefs#new'
+  get '/signup', to: 'chefs#new'
   resources :chefs, except: [:new]
   
 
