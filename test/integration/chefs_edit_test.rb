@@ -26,10 +26,5 @@ class ChefsEditTest < ActionDispatch::IntegrationTest
 		assert_match "Paulo11", @chef.chefname
 		assert_match "dit46@gmail.com", @chef.email
     end
-    test "should get chefs listing" do
-    	get chefs_path
-    	assert_template 'chefs/index'
-  		assert_select "a[href=?]", chef_path(@chef), text: @chef.chefname.capitalize
-  		assert_select "a[href=?]", chef_path(@chef2), text: @chef2.chefname.capitalize
-  	end
+ 
 end

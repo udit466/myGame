@@ -1,7 +1,7 @@
 class RecipeesController <ApplicationController
 	before_action :set_recipee, only: [:show, :edit,:update]
 	def index
-		@recipees = Recipee.all
+		@recipees = Recipee.paginate(page: params[:page], per_page: 5)
 	end
 	def show
 	end
