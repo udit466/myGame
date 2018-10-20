@@ -10,7 +10,7 @@ class RecipeesController <ApplicationController
 	end
 	def create
 		@recipee= Recipee.new(recipee_params)
-		@recipee.chef= Chef.first
+		@recipee.chef= current_chef
 		if @recipee.save
 			flash[:success]= "Recipee was created successfully"
 			redirect_to recipee_path(@recipee)

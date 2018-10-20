@@ -3,7 +3,7 @@ require 'test_helper'
 class RecipeesTest < ActionDispatch::IntegrationTest
   
   def setup
-    @chef= Chef.create!(chefname: "Paulo", email:"paulo@gmail.com",password: "password", password_confirmation: "password")
+    @chef= Chef.create!(chefname: "Paulo", email:"paulo@gmail.com", password: "password", password_confirmation: "password")
     @recipee = Recipee.create(name: "vegetable saute", description: "great vegetable sautee, add vegetable and oil", chef: @chef)
     @recipee2=@chef.recipees.build(name: "chicken saute", description: "great chicken dish")
     @recipee2.save
@@ -25,6 +25,7 @@ class RecipeesTest < ActionDispatch::IntegrationTest
   end
 
   test "should get recipees show" do
+    sign_in_as(@chef, "password")
     get recipee_path(@recipee)
     assert_template 'recipees/show'
     assert_match @recipee.name, response.body
@@ -34,12 +35,13 @@ class RecipeesTest < ActionDispatch::IntegrationTest
     assert_select 'a[href=?]', recipee_path(@recipee), text: "Delete this recipee"
     end
     test "create new valid recipee" do
+      sign_in_as(@chef, "password")
       get new_recipee_path
       assert_template "recipees/new"
       name_of_recipee= "chicken saute"
       description_of_recipee= "add chicken add veggies and voila"
-      assert_difference "Recipee.count"  do
-      post recipees_path, params: {recipee: {name: name_of_recipee, description: description_of_recipee
+      assert_difference "Recipee.count", 1 do
+        post recipees_path, params: {recipee: {name: name_of_recipee, description: description_of_recipee
 
         }}
       end

@@ -18,10 +18,10 @@ Rails.application.routes.draw do
   
   get '/register', to: 'chefs#new'
   
-  get '/login', to: "logins#new"
-  post '/login', to: "logins#create"
-  get '/logout', to: "logins#destroy"
-  
+  get '/login', to: 'sessions#new'
+  post '/login', to: "sessions#create"
+  delete '/logout', to: "sessions#destroy"
+    
   resources :styles, only: [:new, :create, :show]
   resources :ingredients, only: [:new, :create, :show]
   
