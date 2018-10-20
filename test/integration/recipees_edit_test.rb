@@ -6,7 +6,8 @@ class RecipeesEditTest < ActionDispatch::IntegrationTest
 			password: "password", password_confirmation: "password")
 		@recipee = Recipee.create(name: "vegetable saute", description: "great vegetable sautee, add vegetable and oil", chef: @chef)
 	end
-	test "reject invalid recipee update" do 
+	test "reject invalid recipee update" do
+		sign_in_as(@chef, "password") 
 		get edit_recipee_path(@recipee)
 		assert_template "recipees/edit"
 		patch recipee_path(@recipee), params: { recipee: {name: " ", description: " some description"}}
@@ -16,6 +17,7 @@ class RecipeesEditTest < ActionDispatch::IntegrationTest
 	end
 
 	test "sucessfully edit a recipee" do 
+		sign_in_as(@chef, "password") 
 		get edit_recipee_path(@recipee)
 		assert_template 'recipees/edit'
 		updated_name="updated recipee name"

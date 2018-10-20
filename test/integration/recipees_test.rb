@@ -51,6 +51,7 @@ class RecipeesTest < ActionDispatch::IntegrationTest
     end
 
     test "reject invalid recipees" do
+      sign_in_as(@chef, "password") 
       get new_recipee_path
       assert_template "recipees/new"
       assert_no_difference "Recipee.count" do
