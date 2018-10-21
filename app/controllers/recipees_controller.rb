@@ -48,7 +48,7 @@ class RecipeesController <ApplicationController
 	end
 
 	def require_same_user
-		if current_chef != @recipee.chef
+		if current_chef != @recipee.chef and !current_chef.admin?
 			flash[:danger]="You can only edit or delete your own recipee"
 			redirect_to recipees_path
 		end

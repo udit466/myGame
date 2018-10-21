@@ -21,7 +21,7 @@
 	</div>
 
 	<div class="recipee-actions">
-		<% if logged_in? && current_chef == @recipee.chef %>
+		<% if logged_in? && (current_chef == @recipee.chef || current_chef.admin? )%>
 			<%= link_to "Edit this recipee", edit_recipee_path(@recipee),  class: 'btn btn-xs btn-warning' %>
 			 <%= link_to "Delete this recipee", recipee_path(@recipee), method: :delete,  data: { confirm: "Are you sure you want to delete?" },
 	              class: "btn btn-xs btn-danger" %>
